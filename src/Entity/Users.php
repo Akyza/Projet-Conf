@@ -36,6 +36,17 @@ class Users
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $role;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commentaire", inversedBy="idUser")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $no;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +96,30 @@ class Users
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function getNo(): ?Commentaire
+    {
+        return $this->no;
+    }
+
+    public function setNo(?Commentaire $no): self
+    {
+        $this->no = $no;
 
         return $this;
     }
