@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div>
+        {{ form_start(form) }}
+        {{ form_row(form.email, {
+            'label': 'Email: ',
+            'attr': {
+                class: "form-control"
+            }
+        }) }}
+        {{ form_row(form.password, {
+            'label': 'Mot de passe: ',
+            'attr': {
+                class: "form-control"
+            }
+        }) }}
+        <br>
+        <button type="submit" class="btn btn-primary">Connexion</button>
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}
