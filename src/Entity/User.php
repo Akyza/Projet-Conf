@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -42,6 +44,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Conference", mappedBy="user_id")
+     */
+    private $conferences;
+
+    public function __construct()
+    {
+        $this->conferences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -141,6 +153,37 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Conference[]
+     */
+    public function getConferences(): Collection
+    {
+        return $this->conferences;
+    }
+
+    public function addConference(Conference $conference): self
+    {
+        if (!$this->conferences->contains($conference)) {
+            $this->conferences[] = $conference;
+            $conference->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConference(Conference $conference): self
+    {
+        if ($this->conferences->contains($conference)) {
+            $this->conferences->removeElement($conference);
+            // set the owning side to null (unless already changed)
+            if ($conference->getUserId() === $this) {
+                $conference->setUserId(null);
+            }
+        }
+
+        return $this;
     }
 
 

@@ -34,7 +34,6 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserLoginType::class, $user);
         $error =  $authenticationUtils->getLastAuthenticationError();
-        dump($error);
         return $this->render('user/login.html.twig', [
             'error' => $error,
             'form' => $form->createView()
@@ -55,6 +54,9 @@ class UserController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            return $this->redirectToRoute('home', [
+                'id' => $user->getId(),
+            ]);
 
         }
         return $this->render('user/index.html.twig', [
