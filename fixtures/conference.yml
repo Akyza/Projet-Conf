@@ -1,0 +1,6 @@
+App\Entity\Conference:
+  Users-{1..25}:
+    __construct: false
+    title: '<title()>'
+    date: '<date()>'
+    commentaire: '<()>'
