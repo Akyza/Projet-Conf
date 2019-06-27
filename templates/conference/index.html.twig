@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk == false %}
+        <div class="alert alert-dismissible alert-danger">
+            <strong>Article introuvalble</strong>
+        </div>
+    {% endif %}
+    <h2 style="text-align: center">Liste des articles</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <!--<th>Auteur</th>-->
+            <th>Date de parution</th>
+            <th>Article</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.date | date('j/m/Y') }}</td>
+                <td>{{ article.titre }}</td>
+                <td>
+                    <a href="#">Consulter</a>
+                    <a href="#">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <div>
+            <ul class="pagination">
+                {% if page == "1" %}
+                <li class="page-item disable">
+                    <a class="page-link">&laquo;</a>
+                    {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('conference_list', {page: page-1}) }}">&laquo;</a>
+                    {% endif %}
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ page }}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('conference_list', {page: page+1}) }}">&raquo;</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <button type="button" class="btn btn-primary">Ajouter un article</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </table>
+{% endblock %}

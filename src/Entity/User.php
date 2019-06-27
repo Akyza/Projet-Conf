@@ -45,11 +45,6 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Conference", mappedBy="user")
-     */
-    private $conferences;
-
     public function __construct()
     {
         $this->conferences = new ArrayCollection();
