@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk == false %}
+        <div class="alert alert-dismissible alert-danger">
+            <strong>utilisateur introuvable</strong>
+        </div>
+    {% endif %}
+    <h2 style="text-align: center">Liste des utilisateurs</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <!--<th>Auteur</th>-->
+            <th>Name/Firstname</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in user %}
+            <tr>
+                <td>{{ user.name ~ " - "  ~ user.firstname }}</td>
+
+                <td>
+                    <a href="{{ path('user_view', {id: user.id}) }}">Consulter</a>
+                    {% if is_granted(["ROLE_ADMIN"]) %}
+                    <a href="{{ path('user_delete', {id: user.id}) }}">Supprimer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <div>
+            <ul class="pagination">
+                {% if page == "1" %}
+                <li class="page-item disable">
+                    <a class="page-link">&laquo;</a>
+                    {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('user_list', {page: page-1}) }}">&laquo;</a>
+                    {% endif %}
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ page }}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ path('user_list', {page: page+1}) }}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </table>
+{% endblock %}

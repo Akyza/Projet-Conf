@@ -24,7 +24,7 @@
                             <a class="nav-link" href="#">Pricing</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="{{ path("user_list") }}">Liste des membres</a>
                         </li>
                     </ul>
                     {% if is_granted('ROLE_USER') %}

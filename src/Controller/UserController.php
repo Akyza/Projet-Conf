@@ -74,4 +74,51 @@ class UserController extends AbstractController
         throw new Exception("Déconnecté");
     }
 
+
+    /**
+     * @return Response
+     * @Route("/user/list/{page}", name="user_list", defaults={"page"=1})
+     */
+    public function list($page): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        if ($page == 1){
+            $user = $repository->getUser(0);
+        }else{
+            $user = $repository->getUser(($page - 1) * 10);
+        }
+
+        return $this->render('user/list.html.twig', ['user' => $user, 'page' => $page, 'isOk' => true]);
+    }
+
+
+    /**
+     * @return Response
+     * @Route("/view/{id}", name="user_view")
+     */
+    public function viewUser(User $user): Response
+    {
+        return $this->render('user/view.html.twig', ['user' => $user]);
+
+        /*$repository = $this->getDoctrine()->getRepository(User::class);
+        $viewUser = $repository->find($user);
+        dump($user);
+        if (!empty($viewUser)){
+            return $this->render('user/view.html.twig', ['user' => $viewUser]);
+        }
+        return $this->redirectToRoute('user_list', ['users' => $repository->findAll(), 'isOk' => false]);*/
+    }
+
+    /**
+     * @Route(path="/delete/{id}", name="user_delete")
+     */
+    public function delete(User $users): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($users);
+        $em->flush();
+        return $this->redirectToRoute('user_list');
+    }
+
+
 }

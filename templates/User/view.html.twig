@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="jumbotron">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>firstname</th>
+                <th>email</th>
+            </tr>
+            </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if "ROLE_USER" in user.roles %}
+                    <label for="user">Utilisateur: </label>
+                    <input type="checkbox" value="user" name="user" checked disabled>
+                    {% endif %}
+                    {% if "ROLE_ADMIN" in user.roles %}
+                        <label for="admin">Admin: </label>
+                        <input type="checkbox" value="admin" name="admin" checked disabled>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+{% endblock %}
