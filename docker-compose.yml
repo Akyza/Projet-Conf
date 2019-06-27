@@ -41,4 +41,4 @@ services:
     ports:
       - "8025:8025"
 volumes:
-  db-data: {}
+     db-data: {}

@@ -1,8 +1,13 @@
-App\Entity\Users:
-  Users-{1..25}:
-    __construct: false
-    name: '<name()>'
-    firstname: '<()>'
-    mail: '<email()>'
-    password: '<password()>'
-    role: '<numberBetween(0,1)>'
+App\Entity\User:
+  user_1:
+    name: "admin"
+    firstname: "admin"
+    email: "admin@admin.com"
+    password: <passwordEncode(@self, 'admin')>
+    roles: ['ROLE_ADMIN', 'ROLE_USER']
+  user_{2..20}:
+    name: "<name()>"
+    firstname: "<firstName()>"
+    email: "<email()>"
+    password: <passwordEncode(@self, 'admin')>
+

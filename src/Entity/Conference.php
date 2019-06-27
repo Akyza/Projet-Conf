@@ -19,56 +19,72 @@ class Conference
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $date;
+    private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commentaire", inversedBy="idConf")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="conferences")
      */
-    private $commentaire;
+    private $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitre(): ?string
     {
-        return $this->title;
+        return $this->titre;
     }
 
-    public function setTitle(string $title): self
+    public function setTitre(string $titre): self
     {
-        $this->title = $title;
+        $this->titre = $titre;
 
         return $this;
     }
 
-    public function getDate(): ?string
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUserId(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(string $date): self
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getCommentaire(): ?Commentaire
-    {
-        return $this->commentaire;
-    }
-
-    public function setCommentaire(?Commentaire $commentaire): self
-    {
-        $this->commentaire = $commentaire;
 
         return $this;
     }

@@ -15,7 +15,7 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ path("home") }}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Features</a>
@@ -27,8 +27,8 @@
                             <a class="nav-link" href="#">About</a>
                         </li>
                     </ul>
-                    <a class="nav-link" href="#">Connexion</a>
-                    <a class="nav-link" href="{{ path('app_user_add') }}">Inscription</a>
+                    <a class="nav-link" href="{{ path("user_login") }}">Connexion</a>
+                    <a class="nav-link" href="{{ path("user_register") }}">Inscription</a>
                 </div>
             </nav>
         {% block stylesheets %}{% endblock %}
