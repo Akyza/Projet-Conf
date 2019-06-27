@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <br>
+    <table class="table table-hover">
+        <h1>Top conférence : </h1>
+        <thead>
+        <tr class="table-primary">
+            <th>Position</th>
+            <th>Titre</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set x = 0 %}
+        {% for conference in conferences %}
+            {% set x = x + 1 %}
+            <tr class="table-secondary">
+                <td>{{ x }}</td>
+                <td>{{ conference.titre }}</td>
+                <td>{{ conference.score|round(2, 'floor') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,5 +1,5 @@
 App\Entity\Conference:
   conference_{1..20}:
-    titre: '<text()>'
+    titre: '<firstname()>'
     description: '<text()>'
     date: "<dateTimeBetween('1 year ago', 'now')>"

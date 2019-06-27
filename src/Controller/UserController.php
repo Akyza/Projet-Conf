@@ -20,7 +20,7 @@ class UserController extends AbstractController
      */
     public function index()
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/register.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
@@ -60,7 +60,7 @@ class UserController extends AbstractController
             ]);
 
         }
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/register.html.twig', [
             'controller_name' => 'UserController',
             "form" => $form->createView()
         ]);

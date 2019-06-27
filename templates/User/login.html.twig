@@ -3,7 +3,10 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <div>
+    <br><br>
+    <div class="card border-primary mb-3" style="max-width: 20rem; margin: 0 auto; width: 40%">
+    <div class="card-header"> Connexion </div>
+        <div class="card-body">
         {{ form_start(form) }}
         {{ form_row(form.email, {
             'label': 'Email: ',
@@ -21,8 +24,10 @@
         }) }}
         <br>
         <button type="submit" class="btn btn-primary">Connexion</button>
+        <button type="button" class="btn btn-primary" style="margin-left: 4rem"><a style="color: white; text-decoration: none" href="{{ path('user_register') }}">Nouveau ?</a></button>
         {{ form_end(form) }}
 
+        </div>
     </div>
 
 {% endblock %}

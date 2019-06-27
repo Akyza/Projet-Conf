@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Conference;
+use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -23,13 +25,24 @@ class ConferenceRepository extends ServiceEntityRepository
     public function getConferences($firstResult, $maxResult = 10){
         $qb = $this->createQueryBuilder('c');
         $qb
-            ->orderBy('a.date', 'desc')
+            ->orderBy('c.date', 'desc')
             ->setFirstResult($firstResult)
             ->setMaxResults($maxResult);
 
         $pag = new Paginator($qb);
         $c = count($pag);
         return $pag;
+    }
+
+    public function getTopConferences()
+    {
+        $queryBuilder = $this->createQueryBuilder('c')
+            ->select('c.titre, AVG(v.note) AS score')
+            ->innerJoin(Vote::class,'v' ,Join::WITH,'v.conference = c.id')
+            ->groupBy('c.id')
+            ->orderBy('score', 'DESC')
+            ->setMaxResults('10');
+        return $queryBuilder->getQuery()->getArrayResult();
     }
 
     // /**

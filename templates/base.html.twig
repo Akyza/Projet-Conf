@@ -18,21 +18,21 @@
                             <a class="nav-link" href="{{ path("home") }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="{{ path('conference_list') }}">Conférences</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="{{ path('conference_top') }}">Top Conférences</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path("user_list") }}">Liste des membres</a>
                         </li>
                     </ul>
-                    {% if is_granted('ROLE_USER') %}
-                        <h5>Bonjour {{ app.user.name }}</h5>
-                    <a class="nav-link" href="{{ path("user_logout") }}">Déconnexion</a>
+                    {% if is_granted(['ROLE_USER']) %}
+                        <span class="nav-link" style="color: azure">Bonjour {{ app.user.name }}</span>
+                        <a class="nav-link" href="{{ path("user_logout") }}">Déconnexion</a>
                     {% else %}
-                    <a class="nav-link" href="{{ path("user_login") }}">Connexion</a>
-                    <a class="nav-link" href="{{ path("user_register") }}">Inscription</a>
+                        <a class="nav-link" href="{{ path("user_login") }}">Connexion</a>
+                        <a class="nav-link" href="{{ path("user_register") }}">Inscription</a>
                     {% endif %}
                 </div>
             </nav>

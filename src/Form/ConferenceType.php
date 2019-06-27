@@ -15,6 +15,7 @@ class ConferenceType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('date')
+            ->add('image')
         ;
     }
 

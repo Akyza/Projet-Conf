@@ -1,0 +1,5 @@
+App\Entity\Vote:
+  vote_{1..20}:
+    conference: "@conference_*"
+    user: "@user_*"
+    note: <numberBetween(1,5)>
