@@ -10,3 +10,4 @@ App\Entity\User:
     firstname: "<firstName()>"
     email: "<email()>"
     password: <passwordEncode(@self, 'admin')>
+    roles: ['ROLE_USER']

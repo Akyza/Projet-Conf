@@ -46,7 +46,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Conference", mappedBy="user_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Conference", mappedBy="user")
      */
     private $conferences;
 
