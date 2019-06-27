@@ -9,5 +9,10 @@ App\Entity\User:
     name: "<name()>"
     firstname: "<firstName()>"
     email: "<email()>"
+<<<<<<< HEAD
     password: 'admin'
 
+=======
+    password: 'user'
+    roles: ['ROLE_USER']
+>>>>>>> 2abca7b83036f405fd707450ed4a643287ca11c1

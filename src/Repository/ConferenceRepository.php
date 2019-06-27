@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Conference;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +18,18 @@ class ConferenceRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Conference::class);
+    }
+
+    public function getConferences($firstResult, $maxResult = 10){
+        $qb = $this->createQueryBuilder('c');
+        $qb
+            ->orderBy('a.date', 'desc')
+            ->setFirstResult($firstResult)
+            ->setMaxResults($maxResult);
+
+        $pag = new Paginator($qb);
+        $c = count($pag);
+        return $pag;
     }
 
     // /**

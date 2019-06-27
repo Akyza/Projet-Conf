@@ -7,12 +7,14 @@
         {{ form_start(form) }}
         {{ form_row(form.email, {
             'label': 'Email: ',
+            'type': 'email',
             'attr': {
                 class: "form-control"
             }
         }) }}
         {{ form_row(form.password, {
             'label': 'Mot de passe: ',
+            'type': "password",
             'attr': {
                 class: "form-control"
             }

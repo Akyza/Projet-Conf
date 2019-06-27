@@ -22,8 +22,8 @@ final class Version20190626150538 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE conference (id INT AUTO_INCREMENT NOT NULL, user_id_id INT DEFAULT NULL, titre VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_911533C89D86650F (user_id_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE conference ADD CONSTRAINT FK_911533C89D86650F FOREIGN KEY (user_id_id) REFERENCES user (id)');
+        $this->addSql('CREATE TABLE conference (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, titre VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, date DATETIME NOT NULL, INDEX IDX_911533C89D86650F (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE conference ADD CONSTRAINT FK_911533C89D86650F FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL');
     }
 
