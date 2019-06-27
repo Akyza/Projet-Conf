@@ -1,6 +1,5 @@
-App\Entity\Conference:
-  Users-{1..25}:
-    __construct: false
-    title: '<title()>'
-    date: '<date()>'
-    commentaire: '<()>'
+App\Entity\conference:
+  user_{0..20}:
+    titre: "<text()>"
+    date: "<datetime()>"
+    description: "<text()>"

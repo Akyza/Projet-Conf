@@ -3,11 +3,11 @@ App\Entity\User:
     name: "admin"
     firstname: "admin"
     email: "admin@admin.com"
-    password: <passwordEncode(@self, 'admin')>
+    password: 'admin'
     roles: ['ROLE_ADMIN', 'ROLE_USER']
   user_{2..20}:
     name: "<name()>"
     firstname: "<firstName()>"
     email: "<email()>"
-    password: <passwordEncode(@self, 'admin')>
+    password: 'admin'
 

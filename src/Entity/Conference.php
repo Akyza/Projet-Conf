@@ -27,11 +27,6 @@ class Conference
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="conferences")
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $date;
