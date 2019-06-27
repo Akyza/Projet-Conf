@@ -17,11 +17,38 @@ class ConferenceController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Conference::class);
         if ($page == 1) {
-            $articles = $repository->getConference(0);
+            $conferences = $repository->getConferences(0);
         } else {
-            $articles = $repository->getConference(($page - 1) * 10);
+            $conferences = $repository->getConferences(($page - 1) * 10);
         }
 
-        return $this->render('home/index.html.twig', ['articles' => $articles, 'page' => $page, 'isOk' => true]);
+        return $this->render('conference/index.html.twig', ['conferences' => $conferences, 'page' => $page, 'isOk' => true]);
+    }
+
+    /**
+     * @return Response
+     * @param Conference $conference
+     * @Route("/conference/view/{id}", name="conference_view")
+    */
+    public function viewArticle(Conference $conference): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Conference::class);
+        $viewConference = $repository->find($conference);
+        if (!empty($viewConference)) {
+            return $this->render('conference/view.html.twig', ['conference' => $viewConference]);
+        }
+        return $this->redirectToRoute('conference_list', ['articles' => $repository->findAll(), 'isOk' => false]);
+    }
+
+    /**
+     * @return Response
+     * @Route("/topConference/", name="conference_top")
+    */
+    public function topVoteConference(): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Conference::class);
+        $conferences = $repository->getTopConferences();
+        return $this->render('conference/listTopVote.html.twig', ['conferences' => $conferences]);
+
     }
 }

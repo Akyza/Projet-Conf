@@ -1,55 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    <h3 style="text-align: center">Liste des Conférences</h3>
     {% if isOk == false %}
-        <div class="alert alert-dismissible alert-danger">
-            <strong>Article introuvalble</strong>
-        </div>
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+    </div>
     {% endif %}
-    <h2 style="text-align: center">Liste des articles</h2>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <!--<th>Auteur</th>-->
-            <th>Date de parution</th>
-            <th>Article</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.date | date('j/m/Y') }}</td>
-                <td>{{ article.titre }}</td>
-                <td>
-                    <a href="#">Consulter</a>
-                    <a href="#">Supprimer</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-        <div>
-            <ul class="pagination">
-                {% if page == "1" %}
-                <li class="page-item disable">
-                    <a class="page-link">&laquo;</a>
-                    {% else %}
-                <li class="page-item">
-                    <a class="page-link" href="{{ path('conference_list', {page: page-1}) }}">&laquo;</a>
-                    {% endif %}
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">{{ page }}</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="{{ path('conference_list', {page: page+1}) }}">&raquo;</a>
-                </li>
-                <li>
-                    <a href="#">
-                        <button type="button" class="btn btn-primary">Ajouter un article</button>
-                    </a>
-                </li>
-            </ul>
+    {% for conference in conferences %}
+        <hr><hr>
+        <div style="margin: 0 auto; width: 40%">
+            <div class="card mb-3">
+                <h3 class="card-header">{{ conference.titre }}</h3>
+                <img style="height: 200px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158bd1d28ef%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158bd1d28ef%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22129.359375%22%20y%3D%2297.35%22%3EImage%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image">
+                <div class="card-body">
+                    <p class="card-text">{{ conference.description }}</p>
+                </div>
+                <!--<ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>-->
+                <div class="card-body">
+                    <a href="{{ path('conference_view', {id: conference.id}) }}" class="card-link">Consulter</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
         </div>
-    </table>
+    {% endfor %}
 {% endblock %}

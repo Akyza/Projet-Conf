@@ -3,7 +3,10 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <div>
+    <br><br>
+    <div class="card border-primary mb-3" style="max-width: 20rem; margin: 0 auto; width: 40%">
+    <div class="card-header"> Inscription </div>
+        <div class="card-body">
         {{ form_start(form) }}
         {{ form_row(form.name, {
             'label': 'Prénom: ',
@@ -34,7 +37,9 @@
             {{ form_widget(form) }}
         <br>
         <button type="submit" class="btn btn-primary">Inscription</button>
+        <button type="button" class="btn btn-primary" style="margin-left: 1.4rem"><a style="color: white; text-decoration: none" href="{{ path('user_login') }}">Déjà un compte ?</a></button>
         {{ form_end(form) }}
+        </div>
     </div>
 
 {% endblock %}
