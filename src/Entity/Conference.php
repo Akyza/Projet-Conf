@@ -29,7 +29,7 @@ class Conference
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $date;
 
@@ -37,11 +37,6 @@ class Conference
      * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="conference")
      */
     private $votes;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
 
     public function __construct()
     {

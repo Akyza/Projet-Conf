@@ -2,6 +2,10 @@ h3, h2{
     text-align: center;
 }
 
+button a {
+    text-decoration: none;
+}
+
 /* Listes conférences */
 #list_conf{
     width: 40%;

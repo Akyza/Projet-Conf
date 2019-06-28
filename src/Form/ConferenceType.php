@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Conference;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,9 +15,8 @@ class ConferenceType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('description')
-            ->add('date')
-            ->add('image')
+            ->add('description',TextareaType::class)
+            ->add('date', DateType::class)
         ;
     }
 

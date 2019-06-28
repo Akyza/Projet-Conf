@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <h3>Liste des Conférences</h3>
+        <h3>Liste des Conférences</h3>
     <hr><hr>
+    {% if is_granted(["ROLE_ADMIN"]) %}
+        <a href="{{ path('conference_add') }}"><button type="button" class="btn btn-primary" style="display: inline">Ajouter une conférence</button></a>
+        <br> <br>
+    {% endif %}
     {% if isOk == false %}
     <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -28,6 +31,10 @@
                 </ul>-->
                 <div class="card-body">
                     <a href="{{ path('conference_view', {id: conference.id}) }}" class="card-link">Consulter</a>
+                    <a href="{{ path('conference_edit', {id: conference.id}) }}" class="card-link">Editer</a>
+                    {% if is_granted(['ROLE_ADMIN']) %}
+                        <a href="{{ path('conference_delete', {id: conference.id}) }}" class="card-link">Supprimer</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

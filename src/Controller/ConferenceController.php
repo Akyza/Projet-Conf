@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Conference;
+use App\Form\ConferenceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,7 +32,7 @@ class ConferenceController extends AbstractController
      * @param Conference $conference
      * @Route("/conference/view/{id}", name="conference_view")
     */
-    public function viewArticle(Conference $conference): Response
+    public function viewConference(Conference $conference): Response
     {
         $repository = $this->getDoctrine()->getRepository(Conference::class);
         $viewConference = $repository->find($conference);
@@ -38,6 +40,57 @@ class ConferenceController extends AbstractController
             return $this->render('conference/view.html.twig', ['conference' => $viewConference]);
         }
         return $this->redirectToRoute('conference_list', ['articles' => $repository->findAll(), 'isOk' => false]);
+    }
+
+    /**
+     * @Route("/addConference/", name="conference_add")
+    */
+    public function addConference(Request $request): Response{
+        $isOk = false;
+        $newConferenceForm = $this->createForm(ConferenceType::class);
+        $newConferenceForm->handleRequest($request);
+        if ($newConferenceForm->isSubmitted() && $newConferenceForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newConferenceForm->getData());
+            $em->flush();
+            $isOk = true;
+        }
+        return $this->render('conference/add.html.twig', [
+            'isOk' => $isOk,
+            'conferenceForm' => $newConferenceForm->createView(),
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @Route("/conference/edit/{id}", name="conference_edit")
+    */
+    public function edit(Request $request, Conference $conference): Response
+    {
+        $isOk = false;
+        $newConferenceForm = $this->createForm(ConferenceType::class, $conference);
+        $newConferenceForm->handleRequest($request);
+        if ($newConferenceForm->isSubmitted() && $newConferenceForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $isOk = true;
+        }
+
+        return $this->render('conference/edit.html.twig', [
+            'conferenceForm' => $newConferenceForm->createView(),
+            'isOk' => $isOk,
+        ]);
+    }
+
+    /**
+     * @Route("/conference/delete/{id}", name="conference_delete")
+    */
+    public function delete(Conference $conference): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($conference);
+        $em->flush();
+        return $this->redirectToRoute('conference_list');
     }
 
     /**

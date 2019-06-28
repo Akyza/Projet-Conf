@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk %}
+        <div class="alert alert-dismissible alert-success">
+            <h2>La conférence a bien été ajoutée</h2>
+        </div>
+    {% else %}
+        <br>
+        <div class="card border-primary mb-3" style="max-width: 30rem; margin: 0 auto;">
+            <div class="card-header"><h3> Ajouter une conférence </h3></div>
+            <div class="card-body">
+                {{ form_start(conferenceForm) }}
+                {{ form_row(conferenceForm.titre, {
+                    'label': "Titre de la conférence :",
+                    'attr': {
+                        class: "form-control"
+                    }
+                }) }}
+                {{ form_row(conferenceForm.description, {
+                    'label': "Contenu de la conférence: ",
+                    'attr': {
+                        class: "form-control",
+                        'cols': '50'
+                    }
+                }) }}
+                {{ form_row(conferenceForm.date, {
+                    'label': 'Date création: '
+                }) }}
+                <br>
+                <button type="submit" class="btn btn-secondary">Ajouter la conférence</button>
+                {{ form_end(conferenceForm) }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
