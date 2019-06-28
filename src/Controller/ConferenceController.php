@@ -104,4 +104,42 @@ class ConferenceController extends AbstractController
         return $this->render('conference/listTopVote.html.twig', ['conferences' => $conferences]);
 
     }
+
+    /**
+     * @param $page
+     * @return Response
+     * @Route("/noVoteConference/{page}", name="noVoteConference_list" , defaults={"page"=1})
+     */
+    public function listNoVoteConference($page): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Conference::class);
+        if ($page == 1) {
+            $conferences = $repo->getNoVoteConferences(0);
+        } else {
+            $conferences = $repo->getNoVoteConferences(($page - 1) * 10);
+        }
+
+        dump($conferences);
+
+        return $this->render('conference/noVote.html.twig', ['conferences' => $conferences, 'page' => $page, 'isOk' => true]);
+    }
+
+    /**
+     * @param $page
+     * @return Response
+     * @Route("/voteConference/{page}", name="voteConference_list" , defaults={"page"=1})
+     */
+    public function listVoteConference($page): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Conference::class);
+        if ($page == 1) {
+            $conferences = $repo->getVoteConferences(0);
+        } else {
+            $conferences = $repo->getVoteConferences(($page - 1) * 10);
+        }
+
+        dump($conferences);
+
+        return $this->render('conference/listVote.html.twig', ['conferences' => $conferences, 'page' => $page, 'isOk' => true]);
+    }
 }
