@@ -34,6 +34,15 @@ class ConferenceRepository extends ServiceEntityRepository
         return $pag;
     }
 
+    public function getConferencesHome()
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        $queryBuilder
+            ->orderBy('c.date', 'desc')
+            ->setMaxResults('6');
+        return $queryBuilder->getQuery()->getArrayResult();
+    }
+
     public function getTopConferences()
     {
         $queryBuilder = $this->createQueryBuilder('c')

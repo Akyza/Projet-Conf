@@ -1,0 +1,37 @@
+h3, h2{
+    text-align: center;
+}
+
+/* Listes conférences */
+#list_conf{
+    width: 40%;
+    margin-left: 90px;
+    display: inline-block;
+}
+
+/* Home page */
+#home_conf{
+    width: 30%;
+    display: inline-block;
+    margin-left: 30px;
+}
+
+/* Pagination */
+.pagination li a {
+    display: inline-block;
+    font-size: 1.2rem;
+    padding: 0 10px;
+    line-height: 30px;
+}
+
+.pagination {
+    font-weight: bold;
+    text-align: center;
+}
+
+
+li, li:before, li:after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    color: #039be5;
+}
