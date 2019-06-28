@@ -23,10 +23,15 @@
                     {% if "ROLE_ADMIN" in user.roles %}
                         <label for="admin">Admin: </label>
                         <input type="checkbox" value="admin" name="admin" checked disabled>
+
                     {% endif %}
                 </td>
             </tr>
         </tbody>
         </table>
+        <button type="button" class="btn btn-primary"><a style="color: white; text-decoration: none" href="{{ path('user_list')}}">Retourn</a></button>
+        {% if "ROLE_ADMIN" in user.roles %}
+            <button type="button" class="btn btn-primary"><a style="color: white; text-decoration: none" href="{{ path('user_edit',{id: user.id})}}">Edit</a></button>
+        {% endif %}
     </div>
 {% endblock %}

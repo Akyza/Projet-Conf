@@ -11,19 +11,21 @@
         <thead>
         <tr>
             <!--<th>Auteur</th>-->
-            <th>Name/Firstname</th>
+            <th>Name</th>
+            <th>Firstname</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         {% for user in user %}
             <tr>
-                <td>{{ user.name ~ " - "  ~ user.firstname }}</td>
-
+                <td>{{ user.name}}</td>
+                <td>{{user.firstname }}</td>
                 <td>
                     <a href="{{ path('user_view', {id: user.id}) }}">Consulter</a>
                     {% if is_granted(["ROLE_ADMIN"]) %}
-                    <a href="{{ path('user_delete', {id: user.id}) }}">Supprimer</a>
+                      <a href="{{ path('user_edit', {id: user.id}) }}">Edit</a>
+                      <a href="{{ path('user_delete', {id: user.id}) }}">Supprimer</a>
                     {% endif %}
                 </td>
             </tr>

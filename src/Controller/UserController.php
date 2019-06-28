@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserEditType;
 use App\Form\UserRegisterType;
 use App\Form\UserLoginType;
 use mysql_xdevapi\Exception;
@@ -118,6 +119,29 @@ class UserController extends AbstractController
         $em->remove($users);
         $em->flush();
         return $this->redirectToRoute('user_list');
+    }
+
+
+    /**
+     * @return Response
+     * @Route("/user/edit/{id}", name="user_edit")
+     */
+    public function edit(Request $request, User $user): Response
+    {
+        $isOk = false;
+        $newUserForm = $this->createForm(UserEditType::class, $user);
+        $newUserForm->handleRequest($request);
+        if ($newUserForm->isSubmitted() && $newUserForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $isOk = true;
+
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'form' => $newUserForm->createView(),
+            'isOk' => $isOk,
+        ]);
     }
 
 

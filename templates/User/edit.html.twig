@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    {% if isOk %}
+    <div class="alert alert-dismissible alert-success">
+        <h2>L'utilisateur a bien été modifié</h2>
+    </div>
+    {% else %}
+    <br><br>
+    <div class="card border-primary mb-3" style="max-width: 20rem; margin: 0 auto; width: 40%">
+        <div class="card-header"> edit </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_row(form.name, {
+                'label': 'Prénom: ',
+                'attr': {
+                    class: "form-control"
+                }
+            }) }}
+            {{ form_row(form.firstname, {
+                'label': 'Nom de famille: ',
+                'attr': {
+                    class: "form-control"
+                }
+            }) }}
+            {{ form_row(form.email, {
+                'label': 'Email: ',
+                'type': 'email',
+                'attr': {
+                    class: "form-control"
+                }
+            }) }}
+            {{ form_widget(form) }}
+            <br>
+            <button type="submit" class="btn btn-secondary">Modifier l'utilisateur</button>
+{{ form_end(form) }}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
