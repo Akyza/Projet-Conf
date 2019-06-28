@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Conference;
 use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +19,15 @@ class VoteRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Vote::class);
+    }
+
+    public function getScore($idConf)
+    {
+        /*$qb = $this->createQueryBuilder('v')
+            ->select('AVG(v.note) as score, c.id')
+            ->innerJoin(Conference::class, 'c', Join::WITH, 'c.id = v.conference')
+            ->*/
+
     }
 
     // /**

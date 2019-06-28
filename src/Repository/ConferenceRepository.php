@@ -30,6 +30,7 @@ class ConferenceRepository extends ServiceEntityRepository
             ->setMaxResults($maxResult);
 
         $pag = new Paginator($qb);
+        dump($pag);
         $c = count($pag);
         return $pag;
     }
@@ -38,6 +39,9 @@ class ConferenceRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('c');
         $queryBuilder
+            ->select('c.id, c.titre, AVG(v.note) AS score, c.date, c.description')
+            ->innerJoin(Vote::class,'v' ,Join::WITH,'v.conference = c.id')
+            ->groupBy('c.id')
             ->orderBy('c.date', 'desc')
             ->setMaxResults('6');
         return $queryBuilder->getQuery()->getArrayResult();
@@ -52,6 +56,36 @@ class ConferenceRepository extends ServiceEntityRepository
             ->orderBy('score', 'DESC')
             ->setMaxResults('10');
         return $queryBuilder->getQuery()->getArrayResult();
+    }
+
+    public function getNoVoteConferences($firstResult, $maxResult = 10)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb
+            ->leftJoin(Vote::class, 'v', join::WITH, 'v.conference = c.id')
+            ->where('v.note is null')
+            ->orderBy('c.date', 'desc')
+            ->setFirstResult($firstResult)
+            ->setMaxResults($maxResult);
+
+        $pag = new Paginator($qb);
+        $c = count($pag);
+        return $pag;
+    }
+
+    public function getVoteConferences($firstResult, $maxResult = 10)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb
+            ->innerJoin(Vote::class, 'v', join::WITH, 'v.conference = c.id')
+            ->groupBy('c.id')
+            ->orderBy('c.date', 'desc')
+            ->setFirstResult($firstResult)
+            ->setMaxResults($maxResult);
+
+        $pag = new Paginator($qb);
+        $c = count($pag);
+        return $pag;
     }
 
     // /**
